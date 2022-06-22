@@ -8,14 +8,14 @@
  
  # Machine Learning algorithms
 
- - Supervised learning : Algorithm that learns from being given "right answers" (label `Y` from a given input `X`). 
-    - Regression
-    - Classification
+ - Supervised learning : Algorithm that learns from being given "right answers" (label `Y` from a given input `X`). It maps input `X` to output `Y`. 
+    - Regression : Predicting house price
+    - Classification : Predict a category. 
 
 
 
 
- - Unsupervised learning
+ - Unsupervised learning : Find patterns in data without any labelling.  
  - Reinforcement learning
 
 
