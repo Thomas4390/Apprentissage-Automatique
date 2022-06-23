@@ -67,8 +67,8 @@ else:
 # Convert the data to correlated random variables.
 y = np.dot(c, x)
 # Plot various projections of the samples.
-xs_random = y[0]
-ys_random = y[1]
+xs_random = y[1]
+ys_random = y[2]
 
 X_train, X_test, y_train, y_test = xs_random[:70], xs_random[70:], ys_random[:70], ys_random[70:]
 
@@ -76,9 +76,11 @@ X_train, X_test, y_train, y_test = xs_random[:70], xs_random[70:], ys_random[:70
 
 model = LinReg()
 weights, bias, losses = model.fit(X_train, y_train)
+ys_hat = model.predict(xs_random)
 
 fig, ax = plt.subplots()
 ax.plot(xs, ys)
+ax.plot(xs_random, ys_hat)
 ax.scatter(xs_random, ys_random)
 ax.set_ylim(bottom=np.min(xs_random)-1, top=np.max(xs_random)+1)
 ax.set_xlim(left=np.min(ys_random)-1, right=np.max(xs_random)+1)

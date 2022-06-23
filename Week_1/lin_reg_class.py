@@ -66,6 +66,13 @@ class LinReg:
     # Predicting(calculating y_hat with our updated weights) for the 
     # testing/validation     
     def predict(self, X):
-        return np.dot(X, self.weights) + self.bias
+        
+        if len(X.shape) != 1:
+
+            return np.dot(X, self.weights) + self.bias
+
+        else:
+            m = X.shape[0]
+            return np.dot(X.reshape(m, 1), self.weights) + self.bias
 
 
