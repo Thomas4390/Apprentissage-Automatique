@@ -51,7 +51,7 @@ class LinReg:
             # of loss/cost w.r.t parameter
 
             self.weights -= self.lr * dw
-            self.bias = self.lr * db
+            self.bias -= self.lr * db
 
         # Returning the parameter so we can look at them later
         return self.weights, self.bias, losses
