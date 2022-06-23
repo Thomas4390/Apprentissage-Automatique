@@ -16,7 +16,14 @@ class LinReg:
         # Shape of X. 
         # m --> number of training examples 
         # n --> number of features 
-        m, n = X.shape
+        if len(X.shape) != 1:
+
+            m, n = X.shape
+
+        else:
+            m = X.shape[0]
+            n = 1
+            X = X.reshape(m, 1)
 
         # Initializing a column vector of zeros of size : (number of features, 1)
         # and bias as 0. 
