@@ -1,3 +1,4 @@
+from scipy import rand
 import streamlit as st
 from lin_reg_class import LinReg
 import pandas as pd 
@@ -5,13 +6,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import eigh, cholesky
 from scipy.stats import norm
-
+from itertools import combinations
 
 
 st.title("""Linear Regression Application""")
 
-slider_weights = st.sidebar.slider("Choose a weight : W", -5, 5, value=1)
-slider_bias = st.sidebar.slider("Choose a bias : B", -5, 5, value=1)
+slider_weights = st.sidebar.slider("Choose a weight : Beta 1", -5.0, 5.0, value=1.0, step=0.1)
+slider_bias = st.sidebar.slider("Choose a bias : Beta 0", -5.0, 5.0, value=1.0, step=0.1)
 
 st.subheader("What is a Linear Regression?")
 st.markdown("*A simple linear regression model is defined by the following equation:*")
@@ -35,8 +36,6 @@ ys = slider_weights * xs + slider_bias
 # Choice of cholesky or eigenvector method.
 method = 'cholesky'
 #method = 'eigenvectors'
-
-
 
 # The desired covariance matrix.
 r = np.array([
@@ -67,16 +66,21 @@ else:
 # Convert the data to correlated random variables.
 y = np.dot(c, x)
 # Plot various projections of the samples.
-xs_random = y[1]
-ys_random = y[2]
 
-X_train, X_test, y_train, y_test = xs_random[:70], xs_random[70:], ys_random[:70], ys_random[70:]
+xs_random = y[0]
+ys_random = y[1]
 
+train_size = int(size*(1-0.3))
+X_train, X_test, y_train, y_test = xs_random[:train_size], \
+                                   xs_random[train_size:], \
+                                   ys_random[:train_size], \
+                                   ys_random[train_size:]
 
 
 model = LinReg()
 weights, bias, losses = model.fit(X_train, y_train)
 ys_hat = model.predict(xs_random)
+
 
 fig, ax = plt.subplots()
 ax.plot(xs, ys)
