@@ -70,7 +70,9 @@ y = np.dot(c, x)
 xs_random = y[0]
 ys_random = y[1]
 
-train_size = int(size*(1-0.3))
+test_percentage = st.sidebar.slider("Choose training percentage:", 0.01, 0.99, value=0.3, step=0.05)
+
+train_size = int(size*(1-test_percentage))
 X_train, X_test, y_train, y_test = xs_random[:train_size], \
                                    xs_random[train_size:], \
                                    ys_random[:train_size], \
