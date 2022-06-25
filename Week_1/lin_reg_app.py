@@ -11,8 +11,8 @@ from itertools import combinations
 
 st.title("""Linear Regression Application""")
 
-slider_weights = st.sidebar.slider("Choose a weight : Beta 1", -5.0, 5.0, value=1.0, step=0.1)
-slider_bias = st.sidebar.slider("Choose a bias : Beta 0", -5.0, 5.0, value=1.0, step=0.1)
+slider_weights = st.sidebar.slider("Choose a weight : Beta 2", -5.0, 5.0, value=1.0, step=0.1)
+slider_bias = st.sidebar.slider("Choose a bias : Beta 1", -5.0, 5.0, value=1.0, step=0.1)
 
 st.subheader("What is a Linear Regression?")
 st.markdown("*A simple linear regression model is defined by the following equation:*")
