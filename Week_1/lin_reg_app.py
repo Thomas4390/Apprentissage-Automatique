@@ -12,12 +12,26 @@ from itertools import combinations
 st.title("""Linear Regression Application""")
 
 slider_weights = st.sidebar.slider("Choose a weight : Beta 2", -5.0, 5.0, value=1.0, step=0.1)
-slider_bias = st.sidebar.slider("Choose a bias : Beta 1", -5.0, 5.0, value=1.0, step=0.1)
+slider_bias = st.sidebar.slider("Choose a bias : Beta 1", -5.0, 5.0, value=1.0, step=0.1) 
 
 st.subheader("What is a Linear Regression?")
 st.markdown("*A simple linear regression model is defined by the following equation:*")
 st.latex(r"""\forall i \in \{1, 2, ..., n\}, y_i = \beta_1 + \beta_2 x_i + \epsilon_i""")
-st.markdown("""The quantities $\epsilon_i$ come from the fact that the points 
+
+st.write("""The objective of a linear regression is to explain $y_i$ as a function of $x_i$ 
+                ,or to study how $y_i$ varies as a function of $x_i$. 
+                In our linear regression equation, $y_i$ is the dependent or explained variable, 
+                and $x_i$ is the independent or explanatory variable. 
+                Also, \beta_1""") 
+
+st.latex(r"""\beta_1""")
+                
+st.markdown("""represents the constant or the intercept, and""")
+                
+st.latex(r"""\beta_2""")
+                
+st.markdown("""is the coefficient of the slope in the relationship between $y_i$ and $x_i$.
+                Finally, The error term $\epsilon_i$, come from the fact that the points 
                 are never perfectly aligned on a line.
                 They are called errors (or noise) and are assumed to be random. 
                 To be able to say relevant things
