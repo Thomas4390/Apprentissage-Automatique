@@ -76,7 +76,7 @@ def compute_cost(xs, ys, weights, bias):
 my_regression_cost = compute_cost(xs_random, ys_random, slider_weights, slider_bias)
 st.write("Our regression model loss value:", round(my_regression_cost, 5))
 
-test_percentage = st.sidebar.slider("Choose training percentage:", 0.01, 0.99, value=0.3, step=0.05)
+test_percentage = st.sidebar.slider("Choose training size percentage:", 0.01, 0.99, value=0.5, step=0.05)
 
 train_size = int(size*(1-test_percentage))
 X_train, X_test, y_train, y_test = xs_random[:train_size], \
