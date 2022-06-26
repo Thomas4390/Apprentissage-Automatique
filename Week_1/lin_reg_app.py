@@ -70,6 +70,12 @@ y = np.dot(c, x)
 xs_random = y[0]
 ys_random = y[1]
 
+def compute_cost(xs, ys, weights, bias):
+    return np.mean((ys - (weights * xs + bias)) ** 2)
+
+my_regression_cost = compute_cost(xs_random, ys_random, slider_weights, slider_bias)
+st.write("Our regression model loss value:", round(my_regression_cost, 5))
+
 test_percentage = st.sidebar.slider("Choose training percentage:", 0.01, 0.99, value=0.3, step=0.05)
 
 train_size = int(size*(1-test_percentage))
@@ -82,6 +88,8 @@ X_train, X_test, y_train, y_test = xs_random[:train_size], \
 model = LinReg()
 weights, bias, losses = model.fit(X_train, y_train)
 ys_hat = model.predict(xs_random)
+
+st.write("Gradient descent final loss value:", round(losses[-1], 5))
 
 
 fig, ax = plt.subplots()
