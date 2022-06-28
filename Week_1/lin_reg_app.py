@@ -18,25 +18,18 @@ st.subheader("What is a Linear Regression?")
 st.markdown("*A simple linear regression model is defined by the following equation:*")
 st.latex(r"""\forall i \in \{1, 2, ..., n\}, y_i = \beta_1 + \beta_2 x_i + \epsilon_i""")
 
-st.write("""The objective of a linear regression is to explain $y_i$ as a function of $x_i$ 
+st.write(r"""The objective of a linear regression is to explain $y_i$ as a function of $x_i$ 
                 ,or to study how $y_i$ varies as a function of $x_i$. 
                 In our linear regression equation, $y_i$ is the dependent or explained variable, 
                 and $x_i$ is the independent or explanatory variable. 
-                Also, \beta_1""") 
-
-st.latex(r"""\beta_1""")
-                
-st.markdown("""represents the constant or the intercept, and""")
-                
-st.latex(r"""\beta_2""")
-                
-st.markdown("""is the coefficient of the slope in the relationship between $y_i$ and $x_i$.
+                Also, $\beta_1$ represents the constant or the intercept, and $\beta_2$
+                is the coefficient of the slope in the relationship between $y_i$ and $x_i$.
                 Finally, The error term $\epsilon_i$, come from the fact that the points 
                 are never perfectly aligned on a line.
                 They are called errors (or noise) and are assumed to be random. 
                 To be able to say relevant things
                 about this model, one must nevertheless impose some assumptions about them. 
-                Here are those that we will make in a first step: """)
+                Here are those that we will make in a first step: """) 
 
 st.latex(r"""\\
     (\mathcal{H_1}) : \ \mathbb{E}[\epsilon_i] = 0, \forall i \\ 
