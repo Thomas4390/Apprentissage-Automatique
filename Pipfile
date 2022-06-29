@@ -11,6 +11,8 @@ matplotlib = "*"
 streamlit = "*"
 scipy = "*"
 ipympl = "*"
+plotly = "*"
+cufflinks = "*"
 
 [dev-packages]
 ipykernel = "*"
