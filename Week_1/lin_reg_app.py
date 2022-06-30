@@ -1,3 +1,4 @@
+from ctypes import alignment
 from scipy import rand
 import streamlit as st
 from lin_reg_class import LinReg
@@ -7,7 +8,6 @@ import matplotlib.pyplot as plt
 from scipy.linalg import eigh, cholesky
 from scipy.stats import norm
 from itertools import combinations
-
 
 st.title("""Linear Regression Application""")
 
@@ -29,7 +29,7 @@ st.write(r"""The objective of a linear regression is to explain $y_i$ as a funct
                 They are called errors (or noise) and are assumed to be random. 
                 To be able to say relevant things
                 about this model, one must nevertheless impose some assumptions about them. 
-                Here are those that we will make in a first step: """) 
+                Here are those that we will make in a first step:""") 
 
 st.latex(r"""\\
     (\mathcal{H_1}) : \ \mathbb{E}[\epsilon_i] = 0, \forall i \\ 
