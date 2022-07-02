@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 from scipy.linalg import eigh, cholesky
 from scipy.stats import norm
 from itertools import combinations
+import plotly.express as px
+from plotnine import *
+import pingouin as pg
 
 st.title("""Linear Regression Application""")
 
@@ -32,25 +35,31 @@ st.write(r"""Finally, The error term $\epsilon_i$, come from the fact that the p
                 about this model, one must nevertheless impose some assumptions about them. 
                 Here are those that we will make in a first step:""") 
 
-st.write(r"""**Hypothesis 1 - Linearity in the parameters :**""")
+st.header("Small sample assumptions :")
 
-st.write(r"""$y_i = \beta_1 + \beta_2 x_i + \epsilon_i$""")
+math = st.expander('Click to see the 5 hypothesis :')
 
-st.write(r"""**Hypothesis 2 - Random sampling :**""")
+with math:
 
-st.write(r"""The random sample size is $n$ $\rightarrow$ ${(x_i , y_i) : i = 1, 2, ..., n}$""")
+    st.write(r"""**Hypothesis 1 - Linearity in the parameters :**""")
 
-st.write(r"""**Hypothesis 3 - Variation of the explanatory variable within the sample :**""")
+    st.write(r"""$y_i = \beta_1 + \beta_2 x_i + \epsilon_i$""")
 
-st.write(r"""The elements of $x$ in the sample, namely ${x_i, i = 1, 2, ..., n}$, do not all have the same value.""")
+    st.write(r"""**Hypothesis 2 - Random sampling :**""")
 
-st.write(r"""**Hypothesis 4 - Conditional expectation of error equal to zero :**""")
+    st.write(r"""The random sample size is $n$ $\rightarrow$ ${(x_i , y_i) : i = 1, 2, ..., n}$""")
 
-st.write(r"""The error term $\epsilon_i$ displays an expectation equal to zero, whatever the value of x. In other words, $E(\epsilon_i|x) = 0$.""")
+    st.write(r"""**Hypothesis 3 - Variation of the explanatory variable within the sample :**""")
 
-st.write(r"""**Hypothesis 5 - Homoscedasticity :**""")
+    st.write(r"""The elements of $x$ in the sample, namely ${x_i, i = 1, 2, ..., n}$, do not all have the same value.""")
 
-st.write(r"""The variance of the error $\epsilon_i$ is constant, whatever the value of x. In other words, $Var(\epsilon_i|x) = \sigma^2$""")
+    st.write(r"""**Hypothesis 4 - Conditional expectation of error equal to zero :**""")
+
+    st.write(r"""The error term $\epsilon_i$ displays an expectation equal to zero, whatever the value of x. In other words, $E(\epsilon_i|x) = 0$.""")
+
+    st.write(r"""**Hypothesis 5 - Homoscedasticity :**""")
+
+    st.write(r"""The variance of the error $\epsilon_i$ is constant, whatever the value of x. In other words, $Var(\epsilon_i|x) = \sigma^2$""")
 
 size = int(st.sidebar.number_input("Size of random data:", step=1, value=100))
 
