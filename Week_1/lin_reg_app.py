@@ -1,4 +1,3 @@
-from ctypes import alignment
 from scipy import rand
 import streamlit as st
 from lin_reg_class import LinReg
@@ -49,23 +48,14 @@ math = st.expander('Click to see the 5 hypothesis :')
 with math:
 
     st.write(r"""**Hypothesis 1 - Linearity in the parameters :**""")
-
     st.write(r"""$y_i = \beta_1 + \beta_2 x_i + \epsilon_i$""")
-
     st.write(r"""**Hypothesis 2 - Random sampling :**""")
-
     st.write(r"""The random sample size is $n$ $\rightarrow$ ${(x_i , y_i) : i = 1, 2, ..., n}$""")
-
     st.write(r"""**Hypothesis 3 - Variation of the explanatory variable within the sample :**""")
-
     st.write(r"""The elements of $x$ in the sample, namely ${x_i, i = 1, 2, ..., n}$, do not all have the same value.""")
-
     st.write(r"""**Hypothesis 4 - Conditional expectation of error equal to zero :**""")
-
     st.write(r"""The error term $\epsilon_i$ displays an expectation equal to zero, whatever the value of x. In other words, $E(\epsilon_i|x) = 0$.""")
-
     st.write(r"""**Hypothesis 5 - Homoscedasticity :**""")
-
     st.write(r"""The variance of the error $\epsilon_i$ is constant, whatever the value of x. In other words, $Var(\epsilon_i|x) = \sigma^2$""")
 
 st.subheader("""Multiple linear Regression :""")

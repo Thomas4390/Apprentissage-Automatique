@@ -13,6 +13,8 @@ scipy = "*"
 ipympl = "*"
 plotly = "*"
 cufflinks = "*"
+pingouin = "*"
+plotnine = "*"
 
 [dev-packages]
 ipykernel = "*"
