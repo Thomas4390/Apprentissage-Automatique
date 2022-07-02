@@ -74,8 +74,8 @@ else:
 y = np.dot(c, x)
 # Plot various projections of the samples.
 
-xs_random = y[0]
-ys_random = y[1]
+xs_random = y[1]
+ys_random = y[2]
 
 def compute_cost(xs, ys, weights, bias):
     return np.mean((ys - (weights * xs + bias)) ** 2)
