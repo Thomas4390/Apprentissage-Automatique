@@ -17,8 +17,15 @@ st.title("""Linear Regression Application""")
 slider_weights = st.sidebar.slider("Choose a weight : Beta 2", -5.0, 5.0, value=1.0, step=0.1)
 slider_bias = st.sidebar.slider("Choose a bias : Beta 1", -5.0, 5.0, value=1.0, step=0.1) 
 
-st.subheader("What is a Linear Regression?")
-st.markdown("*A simple linear regression model is defined by the following equation:*")
+st.subheader("What is Regression Analysis ?") 
+st.write(r"""Regression analysis is a predictive modelling technique that assesses the relationship between dependent 
+(i.e., the goal/target variable) and independent factors. Forecasting, time series modelling, determining 
+the relationship between variables, and predicting continuous values can all be done using regression analysis. 
+Just to give you an Analogy, Regression is the best way to study the relationship between household 
+areas and a driver’s household electricity cost.""") 
+
+st.subheader("What is a Linear Regression ?")
+st.markdown("*A simple linear regression model is defined by the following equation :*")
 st.latex(r"""\forall i \in \{1, 2, ..., n\}, y_i = \beta_1 + \beta_2 x_i + \epsilon_i""")
 
 st.write(r"""The objective of a linear regression is to explain $y_i$ as a function of $x_i$ 
@@ -35,7 +42,7 @@ st.write(r"""Finally, The error term $\epsilon_i$, come from the fact that the p
                 about this model, one must nevertheless impose some assumptions about them. 
                 Here are those that we will make in a first step:""") 
 
-st.header("Small sample assumptions :")
+st.subheader("Small sample assumptions :")
 
 math = st.expander('Click to see the 5 hypothesis :')
 
@@ -60,6 +67,12 @@ with math:
     st.write(r"""**Hypothesis 5 - Homoscedasticity :**""")
 
     st.write(r"""The variance of the error $\epsilon_i$ is constant, whatever the value of x. In other words, $Var(\epsilon_i|x) = \sigma^2$""")
+
+st.subheader("""Multiple linear Regression :""")
+
+st.write(r"""$y_i = \beta_1 + \beta_2 x_2 + \beta_3 x_3 + ... + \beta_m x_m + \epsilon_i$""")
+
+st.markdown("*The advantages of multiple linear regression compared to simple regression :*")
 
 size = int(st.sidebar.number_input("Size of random data:", step=1, value=100))
 
