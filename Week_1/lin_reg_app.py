@@ -23,18 +23,35 @@ st.write(r"""The objective of a linear regression is to explain $y_i$ as a funct
                 In our linear regression equation, $y_i$ is the dependent or explained variable, 
                 and $x_i$ is the independent or explanatory variable. 
                 Also, $\beta_1$ represents the constant or the intercept, and $\beta_2$
-                is the coefficient of the slope in the relationship between $y_i$ and $x_i$.
-                Finally, The error term $\epsilon_i$, come from the fact that the points 
+                is the coefficient of the slope in the relationship between $y_i$ and $x_i$.""") 
+
+st.write(r"""Finally, The error term $\epsilon_i$, come from the fact that the points 
                 are never perfectly aligned on a line.
                 They are called errors (or noise) and are assumed to be random. 
                 To be able to say relevant things
                 about this model, one must nevertheless impose some assumptions about them. 
                 Here are those that we will make in a first step:""") 
 
-st.latex(r"""\\
-    (\mathcal{H_1}) : \ \mathbb{E}[\epsilon_i] = 0, \forall i \\ 
-(\mathcal{H_2}) : \ Cov(\epsilon_i, \epsilon_j) = \delta_{ij} \sigma^2, \forall (i, j)
-""")
+st.write(r"""**Hypothesis 1 - Linearity in the parameters :**""")
+
+st.write(r"""$y_i = \beta_1 + \beta_2 x_i + \epsilon_i$""")
+
+st.write(r"""**Hypothesis 2 - Random sampling :**""")
+
+st.write(r"""The random sample size is $n$ $\rightarrow$ ${(x_i , y_i) : i = 1, 2, ..., n}$""")
+
+st.write(r"""**Hypothesis 3 - Variation of the explanatory variable within the sample :**""")
+
+st.write(r"""The elements of $x$ in the sample, namely ${x_i, i = 1, 2, ..., n}$, do not all have the same value.""")
+
+st.write(r"""**Hypothesis 4 - Conditional expectation of error equal to zero :**""")
+
+st.write(r"""The error term $\epsilon_i$ displays an expectation equal to zero, whatever the value of x. In other words, $E(\epsilon_i|x) = 0$.""")
+
+st.write(r"""**Hypothesis 5 - Homoscedasticity :**""")
+
+st.write(r"""The variance of the error $\epsilon_i$ is constant, whatever the value of x. In other words, $Var(\epsilon_i|x) = \sigma^2$""")
+
 size = int(st.sidebar.number_input("Size of random data:", step=1, value=100))
 
 xs = np.linspace(-10, 10, 2)
