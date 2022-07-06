@@ -1,4 +1,5 @@
-import numpy as np 
+import numpy as np
+
 
 class LinReg:
 
@@ -13,9 +14,9 @@ class LinReg:
     # Training function: fit
     def fit(self, X, y):
 
-        # Shape of X. 
-        # m --> number of training examples 
-        # n --> number of features 
+        # Shape of X.
+        # m --> number of training examples
+        # n --> number of features
         if len(X.shape) != 1:
 
             m, n = X.shape
@@ -26,11 +27,11 @@ class LinReg:
             X = X.reshape(m, 1)
 
         # Initializing a column vector of zeros of size : (number of features, 1)
-        # and bias as 0. 
+        # and bias as 0.
         self.weights = np.zeros((n, 1))
         self.bias = 0
 
-        # Reshaping y as (m, 1) in case your dataset initialized as 
+        # Reshaping y as (m, 1) in case your dataset initialized as
         # (m, ) which can cause problems
         y = y.reshape(m, 1)
 
@@ -45,14 +46,14 @@ class LinReg:
             y_hat = np.dot(X, self.weights) + self.bias
 
             # Calculating loss
-            loss = np.mean((y_hat - y)**2)
+            loss = np.mean((y_hat - y) ** 2)
 
             # Appending loss to losses
             losses.append(loss)
 
             # Calculating derivatives of parameters (weights and bias)
-            dw = (1/m) * np.dot(X.T, (y_hat - y))
-            db = (1/m) * np.sum((y_hat - y))
+            dw = (1 / m) * np.dot(X.T, (y_hat - y))
+            db = (1 / m) * np.sum((y_hat - y))
 
             # Updating the parameters: parameter := parameter - lr*derivative
             # of loss/cost w.r.t parameter
@@ -63,10 +64,10 @@ class LinReg:
         # Returning the parameter so we can look at them later
         return self.weights, self.bias, losses
 
-    # Predicting(calculating y_hat with our updated weights) for the 
-    # testing/validation     
+    # Predicting(calculating y_hat with our updated weights) for the
+    # testing/validation
     def predict(self, X):
-        
+
         if len(X.shape) != 1:
 
             return np.dot(X, self.weights) + self.bias
@@ -74,5 +75,3 @@ class LinReg:
         else:
             m = X.shape[0]
             return np.dot(X.reshape(m, 1), self.weights) + self.bias
-
-
