@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch
 from ipywidgets import Output
+from matplotlib.widgets import Button, CheckButtons
 
 np.set_printoptions(precision=2)
 
@@ -21,12 +22,14 @@ dlc = dict(
     dldarkred="#C00000",
     dlmagenta="#FF40FF",
     dlpurple="#7030A0",
+    dldarkblue="#0D5BDC",
 )
 dlblue = "#0096ff"
 dlorange = "#FF9300"
 dldarkred = "#C00000"
 dlmagenta = "#FF40FF"
 dlpurple = "#7030A0"
+dldarkblue = "#0D5BDC"
 dlcolors = [dlblue, dlorange, dldarkred, dlmagenta, dlpurple]
 plt.style.use("./deeplearning.mplstyle")
 
@@ -185,7 +188,16 @@ def compute_gradient_matrix(X, y, w, b, logistic=False, lambda_=0):
 
 
 def gradient_descent(
-    X, y, w_in, b_in, alpha, num_iters, logistic=False, lambda_=0, verbose=True
+    X,
+    y,
+    w_in,
+    b_in,
+    alpha,
+    num_iters,
+    logistic=False,
+    lambda_=0,
+    verbose=True,
+    Trace=True,
 ):
     """
     Performs batch gradient descent to learn theta. Updates theta by taking
@@ -211,6 +223,7 @@ def gradient_descent(
     b = b_in
     w = w.reshape(-1, 1)  # prep for matrix operations
     y = y.reshape(-1, 1)
+    last_cost = np.Inf
 
     for i in range(num_iters):
 
@@ -222,13 +235,21 @@ def gradient_descent(
         b = b - alpha * dj_db
 
         # Save cost J at each iteration
-        if i < 100000:  # prevent resource exhaustion
-            J_history.append(compute_cost_matrix(X, y, w, b, logistic, lambda_))
+        ccost = compute_cost_matrix(X, y, w, b, logistic, lambda_)
+        if Trace and i < 100000:  # prevent resource exhaustion
+            J_history.append(ccost)
 
         # Print cost every at intervals 10 times or as many iterations if < 10
         if i % math.ceil(num_iters / 10) == 0:
             if verbose:
-                print(f"Iteration {i:4d}: Cost {J_history[-1]}   ")
+                print(f"Iteration {i:4d}: Cost {ccost}   ")
+            if verbose == 2:
+                print(f"dj_db, dj_dw = {dj_db: 0.3f}, {dj_dw.reshape(-1)}")
+
+            if ccost == last_cost:
+                alpha = alpha / 10
+                print(f" alpha now {alpha}")
+            last_cost = ccost
 
     return (
         w.reshape(w_in.shape),
@@ -361,3 +382,55 @@ def draw_vthresh(ax, x):
         arrowstyle="simple, head_width=5, head_length=10, tail_width=0.0",
     )
     ax.add_artist(f)
+
+
+# -----------------------------------------------------
+# common interactive plotting routines
+# -----------------------------------------------------
+
+
+class button_manager:
+    """Handles some missing features of matplotlib check buttons
+    on init:
+        creates button, links to button_click routine,
+        calls call_on_click with active index and firsttime=True
+    on click:
+        maintains single button on state, calls call_on_click
+    """
+
+    # @output.capture()  # debug
+    def __init__(self, fig, dim, labels, init, call_on_click):
+        """
+        dim: (list)     [leftbottom_x,bottom_y,width,height]
+        labels: (list)  for example ['1','2','3','4','5','6']
+        init: (list)    for example [True, False, False, False, False, False]
+        """
+        self.fig = fig
+        self.ax = plt.axes(dim)  # lx,by,w,h
+        self.init_state = init
+        self.call_on_click = call_on_click
+        self.button = CheckButtons(self.ax, labels, init)
+        self.button.on_clicked(self.button_click)
+        self.status = self.button.get_status()
+        self.call_on_click(self.status.index(True), firsttime=True)
+
+    # @output.capture()  # debug
+    def reinit(self):
+        self.status = self.init_state
+        self.button.set_active(
+            self.status.index(True)
+        )  # turn off old, will trigger update and set to status
+
+    # @output.capture()  # debug
+    def button_click(self, event):
+        """maintains one-on state. If on-button is clicked, will process correctly"""
+        # new_status = self.button.get_status()
+        # new = [self.status[i] ^ new_status[i] for i in range(len(self.status))]
+        # newidx = new.index(True)
+        self.button.eventson = False
+        self.button.set_active(
+            self.status.index(True)
+        )  # turn off old or reenable if same
+        self.button.eventson = True
+        self.status = self.button.get_status()
+        self.call_on_click(self.status.index(True))
